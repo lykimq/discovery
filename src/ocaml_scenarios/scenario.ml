@@ -38,12 +38,16 @@ let discovery_storage = Literal [(key_hash_0, (nonce,uri))]
    provided by factori lib *)
 let discovery_kt1 = "KT1Fp4eEdKcugr8Ftf19UBdMTnyCsTut3LtR"
 
+(* This consensus_kt1 address is deployed in the ithaca_node provided 
+   by factori lib *)
+let consensus_kt1 = "KT1Ves3jg62PfHbgSSwbCyr9pX4KjFFUs74a"
+
 let empty_bytes = Crypto.H.mk ""
 
 let ticket_bytes = Ticket empty_bytes
 
 let vault_storage = {
-  vault = Literal [("", empty_bytes), ticket_bytes];
+  vault = Literal [(*("", empty_bytes), ticket_bytes*)];
   used_handles = Literal [(Z.zero, ())];
   known_handles_hash = Literal [(empty_bytes, ())]
 }
@@ -65,15 +69,15 @@ let main () =
   let _ = Tzfunc.Node.set_silent true in 
   Format.printf "Calling discovery contract@.";
   Format.printf "KT1: %s@." discovery_kt1;
-  Format.printf "Deploying the contract@.";
-    let>? consensus_kt1, _op_hash =
+  Format.printf "Calling consensus contract@.";
+  (*let>? consensus_kt1, _op_hash =
     Consensus_ocaml_interface.deploy 
     ~node:Blockchain.ithaca_node
     ~name:"consensus"
     ~from:Blockchain.alice_flextesa
     ~amount:10000L
     consensus_storage  
-  in 
+  in*) 
   Format.printf "KT1: %s@." consensus_kt1;
 
   Lwt.return_ok ()
