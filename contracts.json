@@ -3,6 +3,10 @@
     {
       "contract_name": "discovery",
       "original_format": "michelson"
+    },
+    {
+      "contract_name": "consensus",
+      "original_format": "michelson"
     }
   ]
 }

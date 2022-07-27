@@ -16,6 +16,7 @@ to see the contract KT1xxx
 *)
 
 open Discovery_ocaml_interface
+open Consensus_ocaml_interface
 open Tzfunc.Rp
 open Factori_types
 

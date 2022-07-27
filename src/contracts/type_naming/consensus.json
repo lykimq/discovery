@@ -1,0 +1,416 @@
+[
+  {
+    "name": "vault",
+    "type": {
+      "record": {
+        "PairP": [
+          {
+            "PairP": [
+              {
+                "LeafP": [
+                  "known_handles_hash",
+                  {
+                    "bigmap": [
+                      {
+                        "base": "byte"
+                      },
+                      {
+                        "base": "unit"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "LeafP": [
+                  "used_handles",
+                  {
+                    "bigmap": [
+                      {
+                        "base": "nat"
+                      },
+                      {
+                        "base": "unit"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "LeafP": [
+              "vault",
+              {
+                "bigmap": [
+                  {
+                    "pair": [
+                      {
+                        "base": "address"
+                      },
+                      {
+                        "base": "byte"
+                      }
+                    ]
+                  },
+                  {
+                    "ticket": {
+                      "base": "byte"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "handle",
+    "type": {
+      "record": {
+        "PairP": [
+          {
+            "PairP": [
+              {
+                "PairP": [
+                  {
+                    "LeafP": [
+                      "amount",
+                      {
+                        "base": "nat"
+                      }
+                    ]
+                  },
+                  {
+                    "LeafP": [
+                      "data",
+                      {
+                        "base": "byte"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "LeafP": [
+                  "id",
+                  {
+                    "base": "nat"
+                  }
+                ]
+              },
+              {
+                "LeafP": [
+                  "owner",
+                  {
+                    "base": "address"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "LeafP": [
+              "ticketer",
+              {
+                "base": "address"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "update_root_hash",
+    "type": {
+      "record": {
+        "PairP": [
+          {
+            "PairP": [
+              {
+                "PairP": [
+                  {
+                    "LeafP": [
+                      "block_height",
+                      {
+                        "base": "int"
+                      }
+                    ]
+                  },
+                  {
+                    "LeafP": [
+                      "block_payload_hash",
+                      {
+                        "base": "byte"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "LeafP": [
+                  "current_validator_keys",
+                  {
+                    "list": {
+                      "option": {
+                        "base": "key"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "LeafP": [
+                  "handles_hash",
+                  {
+                    "base": "byte"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "PairP": [
+              {
+                "LeafP": [
+                  "signatures",
+                  {
+                    "list": {
+                      "option": {
+                        "base": "signature"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "LeafP": [
+                  "state_hash",
+                  {
+                    "base": "byte"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "LeafP": [
+              "validators",
+              {
+                "list": {
+                  "base": "keyhash"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "root_hash",
+    "type": {
+      "record": {
+        "PairP": [
+          {
+            "PairP": [
+              {
+                "PairP": [
+                  {
+                    "LeafP": [
+                      "current_block_hash",
+                      {
+                        "base": "byte"
+                      }
+                    ]
+                  },
+                  {
+                    "LeafP": [
+                      "current_block_height",
+                      {
+                        "base": "int"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "LeafP": [
+                  "current_handles_hash",
+                  {
+                    "base": "byte"
+                  }
+                ]
+              },
+              {
+                "LeafP": [
+                  "current_state_hash",
+                  {
+                    "base": "byte"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "LeafP": [
+              "current_validators",
+              {
+                "list": {
+                  "base": "keyhash"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "withdraw",
+    "type": {
+      "record": {
+        "PairP": [
+          {
+            "PairP": [
+              {
+                "LeafP": [
+                  "callback",
+                  {
+                    "contract": {
+                      "prim": "ticket",
+                      "args": [
+                        {
+                          "prim": "bytes"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "LeafP": [
+                  "handle",
+                  {
+                    "tvar": [
+                      "handle",
+                      {
+                        "record": {
+                          "PairP": [
+                            {
+                              "PairP": [
+                                {
+                                  "PairP": [
+                                    {
+                                      "LeafP": [
+                                        "amount",
+                                        {
+                                          "base": "nat"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "LeafP": [
+                                        "data",
+                                        {
+                                          "base": "byte"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "LeafP": [
+                                    "id",
+                                    {
+                                      "base": "nat"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "LeafP": [
+                                    "owner",
+                                    {
+                                      "base": "address"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "LeafP": [
+                                "ticketer",
+                                {
+                                  "base": "address"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "LeafP": [
+              "handles_hash",
+              {
+                "base": "byte"
+              }
+            ]
+          },
+          {
+            "LeafP": [
+              "proof",
+              {
+                "list": {
+                  "pair": [
+                    {
+                      "base": "byte"
+                    },
+                    {
+                      "base": "byte"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "deposit",
+    "type": {
+      "record": {
+        "PairP": [
+          {
+            "LeafP": [
+              "address",
+              {
+                "base": "address"
+              }
+            ]
+          },
+          {
+            "LeafP": [
+              "ticket",
+              {
+                "ticket": {
+                  "base": "byte"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+]
