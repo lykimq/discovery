@@ -327,8 +327,10 @@ Reinstall `opam reinstall pgocaml`
 
 ```bash
 make deps
-make
+make drop & make
 ```
+
+Use `make drop` to clean up, in case it does not find the contract storage.
 
 #### Edit the Configuration file and run crawlori with the generated plugins
 

@@ -1,8 +1,4 @@
-let downgrade =
-  [
-    "drop state cascade";
-    "drop all_operations cascade";
-  ]
+let downgrade = ["drop state cascade"; "drop all_operations cascade"]
 
 let upgrade =
   [
