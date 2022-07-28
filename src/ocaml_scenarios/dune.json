@@ -9,6 +9,7 @@
       "scenario"
     ],
     "libraries": [
+      "dummy_ticket_ocaml_interface",
       "discovery_ocaml_interface",
       "consensus_ocaml_interface",
       "blockchain",

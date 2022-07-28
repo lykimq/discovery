@@ -1,6 +1,10 @@
 {
   "contracts": [
     {
+      "contract_name": "dummy_ticket",
+      "original_format": "michelson"
+    },
+    {
       "contract_name": "discovery",
       "original_format": "michelson"
     },

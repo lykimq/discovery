@@ -1,0 +1,65 @@
+{ parameter
+    (or (or (ticket %burn_callback bytes)
+            (pair %mint_to_deku
+               (pair (address %deku_consensus) (address %deku_recipient))
+               (nat %ticket_amount)
+               (bytes %ticket_data)))
+        (pair %withdraw_from_deku
+           (pair (address %deku_consensus)
+                 (pair %handle
+                    (pair (pair (nat %amount) (bytes %data)) (nat %id) (address %owner))
+                    (address %ticketer)))
+           (bytes %handles_hash)
+           (list %proof (pair bytes bytes)))) ;
+  storage unit ;
+  code { CAR ;
+         IF_LEFT
+           { IF_LEFT
+               { DROP ; UNIT ; NIL operation }
+               { UNPAIR ;
+                 UNPAIR ;
+                 DIG 2 ;
+                 UNPAIR ;
+                 SWAP ;
+                 TICKET ;
+                 SWAP ;
+                 CONTRACT %deposit (pair (address %address) (ticket %ticket bytes)) ;
+                 IF_NONE { PUSH string "invalid deku consensus address" ; FAILWITH } {} ;
+                 PUSH mutez 0 ;
+                 DIG 2 ;
+                 DIG 3 ;
+                 PAIR ;
+                 TRANSFER_TOKENS ;
+                 UNIT ;
+                 NIL operation ;
+                 DIG 2 ;
+                 CONS } }
+           { UNPAIR ;
+             UNPAIR ;
+             DIG 2 ;
+             UNPAIR ;
+             SELF %burn_callback ;
+             DIG 3 ;
+             CONTRACT %withdraw
+               (pair (pair (contract %callback (ticket bytes))
+                           (pair %handle
+                              (pair (pair (nat %amount) (bytes %data)) (nat %id) (address %owner))
+                              (address %ticketer)))
+                     (bytes %handles_hash)
+                     (list %proof (pair bytes bytes))) ;
+             IF_NONE { PUSH string "invalid deku consensus address" ; FAILWITH } {} ;
+             PUSH mutez 0 ;
+             DIG 4 ;
+             DIG 4 ;
+             PAIR ;
+             DIG 4 ;
+             DIG 4 ;
+             PAIR ;
+             PAIR ;
+             TRANSFER_TOKENS ;
+             UNIT ;
+             NIL operation ;
+             DIG 2 ;
+             CONS } ;
+         PAIR } }
+
