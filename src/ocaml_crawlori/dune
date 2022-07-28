@@ -1,4 +1,36 @@
 (library
+(name dummy_ticket_plugin)
+(modules dummy_ticket_plugin)
+(libraries bm_utils crawlori.pg contracts dummy_ticket_ocaml_interface dummy_ticket_tables)
+
+(preprocess (pps pgocaml_ppx ppx_deriving_encoding ez_api.ppx))
+(preprocessor_deps (env_var "PGDATABASE") (env_var "PGCUSTOM_CONVERTERS_CONFIG") .db_witness))
+
+(library
+(name dummy_ticket_tables)
+(modules dummy_ticket_tables)
+
+
+
+)
+
+(library
+(name consensus_plugin)
+(modules consensus_plugin)
+(libraries bm_utils crawlori.pg contracts consensus_ocaml_interface consensus_tables)
+
+(preprocess (pps pgocaml_ppx ppx_deriving_encoding ez_api.ppx))
+(preprocessor_deps (env_var "PGDATABASE") (env_var "PGCUSTOM_CONVERTERS_CONFIG") .db_witness))
+
+(library
+(name consensus_tables)
+(modules consensus_tables)
+
+
+
+)
+
+(library
 (name discovery_plugin)
 (modules discovery_plugin)
 (libraries bm_utils crawlori.pg contracts discovery_ocaml_interface discovery_tables)
@@ -56,7 +88,7 @@ let no_update = false"))))
 (executable
 (name update)
 (modules update)
-(libraries discovery_tables static_tables contracts_table ez_pgocaml crawlori.tables db_env_box))
+(libraries dummy_ticket_tables consensus_tables discovery_tables static_tables contracts_table ez_pgocaml crawlori.tables db_env_box))
 
 (rule
 (deps update.exe)
@@ -82,4 +114,4 @@ let no_update = false"))))
 (executable
 (name crawler)
 (modules crawler register)
-(libraries discovery_plugin common crawlori ez_api.icurl_lwt ez_api.server))
+(libraries dummy_ticket_plugin consensus_plugin discovery_plugin common crawlori ez_api.icurl_lwt ez_api.server))

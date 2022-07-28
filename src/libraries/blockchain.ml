@@ -86,11 +86,25 @@ let flextesa_node = "http://localhost:20000"
 
 let ithaca_node = "https://ithacanet.ecadinfra.com"
 
+let ghostnet_node = "https://ithacanet.ecadinfra.com" (* Might become obsolete *)
+
+let jakarta_node = "https://jakartanet.ecadinfra.com"
+
+let mainnet_node = "https://tz.functori.com"
+
 let default_node = sandbox_node
 
 let default_base = EzAPI.BASE default_node
 
-let main_base = EzAPI.BASE "https://tz.functori.com"
+let flextesa_base = EzAPI.BASE flextesa_node
+
+let ithaca_base = EzAPI.BASE ithaca_node
+
+let ghostnet_base = EzAPI.BASE ghostnet_node
+
+let jakarta_base = EzAPI.BASE jakarta_node
+
+let main_base = EzAPI.BASE mainnet_node
 
 let get_balance ?(base = default_base) ~addr () =
   let open Tzfunc.Rp in

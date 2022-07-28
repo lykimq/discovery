@@ -161,7 +161,7 @@ Now Bob can send himself some money from Alice's account:
     // We change the signer to Bob
     setSigner(tezosKit,bob_flextesa.sk)
     let op_transfer = await fa2.call_transfer (tezosKit,kt1,param_transfer)
-    console.log(`send op_hash: ${JSON.stringify(op_transfer)}`)
+    console.log(`send op_hash: ${JSONbig.stringify(op_transfer)}`)
 ```
 
 ### Run the complete `main` function
@@ -279,4 +279,77 @@ let main () =
 
 Feel free to explore the Blockchain module, where you will find
 many other things you can do with your smart contracts.
+
+## CRAWLORI
+
+Factori has generated a generic Crawlori plugin for your project.
+
+Crawlori is a powerful crawler developed by [Functori](https://functori.com).
+It allows to crawl Tezos blockchain in a very fast and modular way.
+
+### How to run the crawler
+
+#### Postgresql setup
+
+If this is your first time using pgocaml. You might need to install postgresql and configure it to give the required rights to your user.
+
+```bash
+sudo -i -u postgres -- psql -c 'create user <USER> with createdb;'
+```
+
+replace: `<User>` with the username for example `user_psql`.
+
+#### Opam setup
+
+The pgocaml package doesn't play well with the sandbox mode of OPAM.
+So you might need to disable it.
+
+On a fresh install of opam you can proceed like this:
+```bash
+opam init --reinit --disable-sandboxing --bare
+opam reinstall pgocaml pgocaml_ppx ez_pgocaml
+```
+
+Otherwise, you can edit the opam config file (default location is `~/.opam/config`).
+To disable the sandboxing you can comment out the last three lines:
+```bash
+wrap-build-commands:
+  ["%{hooks}%/sandbox.sh" "build"] {os = "linux" | os = "macos"}
+wrap-install-commands:
+  ["%{hooks}%/sandbox.sh" "install"] {os = "linux" | os = "macos"}
+wrap-remove-commands:
+  ["%{hooks}%/sandbox.sh" "remove"] {os = "linux" | os = "macos"}
+```
+
+Reinstall `opam reinstall pgocaml`
+
+#### Build
+
+```bash
+make deps
+make
+```
+
+#### Edit the Configuration file and run crawlori with the generated plugins
+
+The next thing is to edit `src/ocaml_crawlori/config.json`. Here is a run down of the fields:
+
+```json
+{
+  "nodes": <string list> ,    // required, list of Tezos node: for example [ "http://tz.functori.com" ]
+  "start": <int>,             // optional, the start block from which you want to start crawling
+  "step_forward": <int>,      // optional, number of block chunks you want to crawl, default value is 100
+  "sleep" : <float>,          // optional, sleep time for the head watcher
+  "confirmations_needed" : <int>,    // optional, depth at which you want to acknowledge that a block is assured, default is 10
+  "originator_address" : <string> // required, the tz1 to watch for originations
+}
+```
+
+Then to start crawlori, you can run the following command:
+```bash
+_build/default/src/ocaml_crawlori/crawler.exe src/ocaml_crawlori/config.json
+```
+
+Please refer to [Crawlori](https://gitlab.com/functori/crawlori) repository for more informations and troubleshooting.
+
 

@@ -23,6 +23,37 @@
       "content": {
         "StrContent": "let>? () = [%pgsql dbh \"insert into contracts\\\n(address,kind,transaction,block,index,level,tsp,main,bmid_discovery_) \\\nvalues \\\n($address,$kind,${op.bo_hash},${op.bo_block},${op.bo_index},\\\n${op.bo_level},${op.bo_tsp},$forward,$bmid_discovery_)\"] in\nconfig.contracts <- CSet.add (track_contract address kind ~ci_bmid_discovery_:bmid_discovery_) config.contracts ;\nrok ()"
       }
+    },
+    {
+      "name": "consensus_register",
+      "args": [
+        "~dbh",
+        "~forward",
+        "config",
+        "address",
+        "kind",
+        "op",
+        "bmid_consensus_vault_vault",
+        "bmid_consensus_vault_used_handles",
+        "bmid_consensus_vault_known_handles_hash"
+      ],
+      "content": {
+        "StrContent": "let>? () = [%pgsql dbh \"insert into contracts\\\n(address,kind,transaction,block,index,level,tsp,main,bmid_consensus_vault_vault,bmid_consensus_vault_used_handles,bmid_consensus_vault_known_handles_hash) \\\nvalues \\\n($address,$kind,${op.bo_hash},${op.bo_block},${op.bo_index},\\\n${op.bo_level},${op.bo_tsp},$forward,$bmid_consensus_vault_vault,$bmid_consensus_vault_used_handles,$bmid_consensus_vault_known_handles_hash)\"] in\nconfig.contracts <- CSet.add (track_contract address kind ~ci_bmid_consensus_vault_vault:bmid_consensus_vault_vault ~ci_bmid_consensus_vault_used_handles:bmid_consensus_vault_used_handles ~ci_bmid_consensus_vault_known_handles_hash:bmid_consensus_vault_known_handles_hash) config.contracts ;\nrok ()"
+      }
+    },
+    {
+      "name": "dummy_ticket_register",
+      "args": [
+        "~dbh",
+        "~forward",
+        "config",
+        "address",
+        "kind",
+        "op"
+      ],
+      "content": {
+        "StrContent": "let>? () = [%pgsql dbh \"insert into contracts\\\n(address,kind,transaction,block,index,level,tsp,main) \\\nvalues \\\n($address,$kind,${op.bo_hash},${op.bo_block},${op.bo_index},\\\n${op.bo_level},${op.bo_tsp},$forward)\"] in\nconfig.contracts <- CSet.add (track_contract address kind) config.contracts ;\nrok ()"
+      }
     }
   ]
 }

@@ -17,6 +17,12 @@
             "SeqContent": [
               {
                 "StrContent": "Plugins.register_mod (module Discovery_plugin)"
+              },
+              {
+                "StrContent": "Plugins.register_mod (module Consensus_plugin)"
+              },
+              {
+                "StrContent": "Plugins.register_mod (module Dummy_ticket_plugin)"
               }
             ]
           }

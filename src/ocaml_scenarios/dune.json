@@ -10,13 +10,12 @@
     ],
     "libraries": [
       "dummy_ticket_ocaml_interface",
-      "discovery_ocaml_interface",
       "consensus_ocaml_interface",
+      "discovery_ocaml_interface",
       "blockchain",
       "utils",
       "ez_api.icurl_lwt",
-      "lwt.unix",
-      "factori"
+      "lwt.unix"
     ]
   }
 ]

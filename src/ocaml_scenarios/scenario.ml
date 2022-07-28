@@ -1,16 +1,13 @@
-(* This file is only generated once, but as long as it exists it
-   will not be overwritten, you can safely write in it. To find
-   examples for your scenarios, you can look at scenarios.example.ml *)
+(* This file is only generated once, but as long as it exists it 
+will not be overwritten, you can safely write in it. To find 
+examples for your scenarios, you can look at scenarios.example.ml *)
 
 (* compile the project using:
     eval $(opam env --switch=/home/quyen/factori --set-switch)
-
    make deps
    make ocaml
    make run_scenario_ocaml
-
    Using : https://ghostnet.tzkt.io/
-
    to see the contract KT1xxx
 *)
 

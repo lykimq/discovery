@@ -24,6 +24,9 @@ depends: [
   "ocamlformat" {>= "0.21.0" }
   "odoc" {with-doc}
   "ez_api"
+  "crawlori"
+  "pgocaml_ppx"
+  "ez_pgocaml"
 ]
 build: [
   ["dune" "subst"] {pinned}
@@ -47,5 +50,6 @@ pin-depends: [
   [ "ezjs_min.dev" "git+https://github.com/ocamlpro/ezjs_min" ]
   [ "ez_api.dev" "git+https://github.com/ocamlpro/ez_api" ]
   [ "mligo.dev" "git+https://gitlab.com/functori/dev/mligo.git"]
+  [ "ez_pgocaml.dev" "git+https://github.com/ocamlpro/ez_pgocaml.git" ]
+  [ "crawlori.~dev" "git+https://gitlab.com/functori/dev/crawlori.git" ]
 ]
-

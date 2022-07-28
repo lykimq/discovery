@@ -1,62 +1,5 @@
 [
   {
-    "name": "handle",
-    "type": {
-      "record": {
-        "PairP": [
-          {
-            "PairP": [
-              {
-                "PairP": [
-                  {
-                    "LeafP": [
-                      "amount",
-                      {
-                        "base": "nat"
-                      }
-                    ]
-                  },
-                  {
-                    "LeafP": [
-                      "data",
-                      {
-                        "base": "byte"
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "LeafP": [
-                  "id",
-                  {
-                    "base": "nat"
-                  }
-                ]
-              },
-              {
-                "LeafP": [
-                  "owner",
-                  {
-                    "base": "address"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "LeafP": [
-              "ticketer",
-              {
-                "base": "address"
-              }
-            ]
-          }
-        ]
-      }
-    }
-  },
-  {
     "name": "withdraw_from_deku",
     "type": {
       "record": {
@@ -149,16 +92,76 @@
             "LeafP": [
               "proof",
               {
-                "list": {
-                  "pair": [
-                    {
-                      "base": "byte"
-                    },
-                    {
-                      "base": "byte"
-                    }
-                  ]
-                }
+                "unary": [
+                  "list",
+                  {
+                    "pair": [
+                      {
+                        "base": "byte"
+                      },
+                      {
+                        "base": "byte"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "handle",
+    "type": {
+      "record": {
+        "PairP": [
+          {
+            "PairP": [
+              {
+                "PairP": [
+                  {
+                    "LeafP": [
+                      "amount",
+                      {
+                        "base": "nat"
+                      }
+                    ]
+                  },
+                  {
+                    "LeafP": [
+                      "data",
+                      {
+                        "base": "byte"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "LeafP": [
+                  "id",
+                  {
+                    "base": "nat"
+                  }
+                ]
+              },
+              {
+                "LeafP": [
+                  "owner",
+                  {
+                    "base": "address"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "LeafP": [
+              "ticketer",
+              {
+                "base": "address"
               }
             ]
           }

@@ -1141,71 +1141,313 @@ fun x (x1,x2) -> (x,x1,x2) in
      ntuple_to_Sntuple d1 d2
   | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple4_decode dec1 dec2 dec3 dec4 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4)| expr -> fail_on_micheline "Invalid tuple4" expr
+let tuple4_decode dec1 dec2 dec3 dec4 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3) -> (x,x1,x2,x3) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple3_decode dec2 dec3 dec4 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple3_decode dec2 dec3 dec4 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple5_decode dec1 dec2 dec3 dec4 dec5 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5)| expr -> fail_on_micheline "Invalid tuple5" expr
+let tuple5_decode dec1 dec2 dec3 dec4 dec5 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4) -> (x,x1,x2,x3,x4) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple4_decode dec2 dec3 dec4 dec5 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple4_decode dec2 dec3 dec4 dec5 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple6_decode dec1 dec2 dec3 dec4 dec5 dec6 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6)| expr -> fail_on_micheline "Invalid tuple6" expr
+let tuple6_decode dec1 dec2 dec3 dec4 dec5 dec6 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5) -> (x,x1,x2,x3,x4,x5) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple5_decode dec2 dec3 dec4 dec5 dec6 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple5_decode dec2 dec3 dec4 dec5 dec6 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple7_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7)| expr -> fail_on_micheline "Invalid tuple7" expr
+let tuple7_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6) -> (x,x1,x2,x3,x4,x5,x6) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple6_decode dec2 dec3 dec4 dec5 dec6 dec7 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple6_decode dec2 dec3 dec4 dec5 dec6 dec7 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple8_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8)| expr -> fail_on_micheline "Invalid tuple8" expr
+let tuple8_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7) -> (x,x1,x2,x3,x4,x5,x6,x7) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple7_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple7_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple9_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8;x9];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8,dec9 x9)| expr -> fail_on_micheline "Invalid tuple9" expr
+let tuple9_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7,x8) -> (x,x1,x2,x3,x4,x5,x6,x7,x8) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple8_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple8_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple10_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8;x9;x10];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8,dec9 x9,dec10 x10)| expr -> fail_on_micheline "Invalid tuple10" expr
+let tuple10_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7,x8,x9) -> (x,x1,x2,x3,x4,x5,x6,x7,x8,x9) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple9_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple9_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple11_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8;x9;x10;x11];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8,dec9 x9,dec10 x10,dec11 x11)| expr -> fail_on_micheline "Invalid tuple11" expr
+let tuple11_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10) -> (x,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple10_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple10_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple12_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8;x9;x10;x11;x12];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8,dec9 x9,dec10 x10,dec11 x11,dec12 x12)| expr -> fail_on_micheline "Invalid tuple12" expr
+let tuple12_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11) -> (x,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple11_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple11_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple13_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8;x9;x10;x11;x12;x13];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8,dec9 x9,dec10 x10,dec11 x11,dec12 x12,dec13 x13)| expr -> fail_on_micheline "Invalid tuple13" expr
+let tuple13_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12) -> (x,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple12_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple12_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple14_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8;x9;x10;x11;x12;x13;x14];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8,dec9 x9,dec10 x10,dec11 x11,dec12 x12,dec13 x13,dec14 x14)| expr -> fail_on_micheline "Invalid tuple14" expr
+let tuple14_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13) -> (x,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple13_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple13_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple15_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8;x9;x10;x11;x12;x13;x14;x15];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8,dec9 x9,dec10 x10,dec11 x11,dec12 x12,dec13 x13,dec14 x14,dec15 x15)| expr -> fail_on_micheline "Invalid tuple15" expr
+let tuple15_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14) -> (x,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple14_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple14_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple16_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8;x9;x10;x11;x12;x13;x14;x15;x16];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8,dec9 x9,dec10 x10,dec11 x11,dec12 x12,dec13 x13,dec14 x14,dec15 x15,dec16 x16)| expr -> fail_on_micheline "Invalid tuple16" expr
+let tuple16_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15) -> (x,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple15_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple15_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple17_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8;x9;x10;x11;x12;x13;x14;x15;x16;x17];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8,dec9 x9,dec10 x10,dec11 x11,dec12 x12,dec13 x13,dec14 x14,dec15 x15,dec16 x16,dec17 x17)| expr -> fail_on_micheline "Invalid tuple17" expr
+let tuple17_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16) -> (x,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple16_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple16_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple18_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8;x9;x10;x11;x12;x13;x14;x15;x16;x17;x18];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8,dec9 x9,dec10 x10,dec11 x11,dec12 x12,dec13 x13,dec14 x14,dec15 x15,dec16 x16,dec17 x17,dec18 x18)| expr -> fail_on_micheline "Invalid tuple18" expr
+let tuple18_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17) -> (x,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple17_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple17_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple19_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8;x9;x10;x11;x12;x13;x14;x15;x16;x17;x18;x19];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8,dec9 x9,dec10 x10,dec11 x11,dec12 x12,dec13 x13,dec14 x14,dec15 x15,dec16 x16,dec17 x17,dec18 x18,dec19 x19)| expr -> fail_on_micheline "Invalid tuple19" expr
+let tuple19_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18) -> (x,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple18_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple18_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple20_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8;x9;x10;x11;x12;x13;x14;x15;x16;x17;x18;x19;x20];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8,dec9 x9,dec10 x10,dec11 x11,dec12 x12,dec13 x13,dec14 x14,dec15 x15,dec16 x16,dec17 x17,dec18 x18,dec19 x19,dec20 x20)| expr -> fail_on_micheline "Invalid tuple20" expr
+let tuple20_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19) -> (x,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple19_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple19_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple21_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8;x9;x10;x11;x12;x13;x14;x15;x16;x17;x18;x19;x20;x21];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8,dec9 x9,dec10 x10,dec11 x11,dec12 x12,dec13 x13,dec14 x14,dec15 x15,dec16 x16,dec17 x17,dec18 x18,dec19 x19,dec20 x20,dec21 x21)| expr -> fail_on_micheline "Invalid tuple21" expr
+let tuple21_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x20) -> (x,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x20) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple20_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple20_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple22_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 dec22 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8;x9;x10;x11;x12;x13;x14;x15;x16;x17;x18;x19;x20;x21;x22];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8,dec9 x9,dec10 x10,dec11 x11,dec12 x12,dec13 x13,dec14 x14,dec15 x15,dec16 x16,dec17 x17,dec18 x18,dec19 x19,dec20 x20,dec21 x21,dec22 x22)| expr -> fail_on_micheline "Invalid tuple22" expr
+let tuple22_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 dec22 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x20,x21) -> (x,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x20,x21) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple21_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 dec22 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple21_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 dec22 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple23_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 dec22 dec23 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8;x9;x10;x11;x12;x13;x14;x15;x16;x17;x18;x19;x20;x21;x22;x23];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8,dec9 x9,dec10 x10,dec11 x11,dec12 x12,dec13 x13,dec14 x14,dec15 x15,dec16 x16,dec17 x17,dec18 x18,dec19 x19,dec20 x20,dec21 x21,dec22 x22,dec23 x23)| expr -> fail_on_micheline "Invalid tuple23" expr
+let tuple23_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 dec22 dec23 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x20,x21,x22) -> (x,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x20,x21,x22) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple22_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 dec22 dec23 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple22_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 dec22 dec23 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple24_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 dec22 dec23 dec24 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8;x9;x10;x11;x12;x13;x14;x15;x16;x17;x18;x19;x20;x21;x22;x23;x24];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8,dec9 x9,dec10 x10,dec11 x11,dec12 x12,dec13 x13,dec14 x14,dec15 x15,dec16 x16,dec17 x17,dec18 x18,dec19 x19,dec20 x20,dec21 x21,dec22 x22,dec23 x23,dec24 x24)| expr -> fail_on_micheline "Invalid tuple24" expr
+let tuple24_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 dec22 dec23 dec24 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x20,x21,x22,x23) -> (x,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x20,x21,x22,x23) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple23_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 dec22 dec23 dec24 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple23_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 dec22 dec23 dec24 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 
-let tuple25_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 dec22 dec23 dec24 dec25 = function
-          | Mprim {prim = `Pair;args=[x1;x2;x3;x4;x5;x6;x7;x8;x9;x10;x11;x12;x13;x14;x15;x16;x17;x18;x19;x20;x21;x22;x23;x24;x25];annots=[]} -> (dec1 x1,dec2 x2,dec3 x3,dec4 x4,dec5 x5,dec6 x6,dec7 x7,dec8 x8,dec9 x9,dec10 x10,dec11 x11,dec12 x12,dec13 x13,dec14 x14,dec15 x15,dec16 x16,dec17 x17,dec18 x18,dec19 x19,dec20 x20,dec21 x21,dec22 x22,dec23 x23,dec24 x24,dec25 x25)| expr -> fail_on_micheline "Invalid tuple25" expr
+let tuple25_decode dec1 dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 dec22 dec23 dec24 dec25 =
+     let ntuple_to_Sntuple =
+fun x (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x20,x21,x22,x23,x24) -> (x,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x20,x21,x22,x23,x24) in
+     function
+  | Mprim {prim = `Pair; args = [m1;m2]; _} | Mseq [m1;m2] ->
+     let d1 = dec1 m1 in
+     let d2 = tuple24_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 dec22 dec23 dec24 dec25 (Mseq [m2]) in
+     ntuple_to_Sntuple d1 d2
+  | Mprim {prim = `Pair; args = m1::m; _} | Mseq (m1::m) ->
+     let d1 = dec1 m1 in
+     let d2 = tuple24_decode dec2 dec3 dec4 dec5 dec6 dec7 dec8 dec9 dec10 dec11 dec12 dec13 dec14 dec15 dec16 dec17 dec18 dec19 dec20 dec21 dec22 dec23 dec24 dec25 (Mseq m) in
+     ntuple_to_Sntuple d1 d2
+  | expr -> fail_on_micheline "Invalid tuple2" expr
 let tuple3_micheline mich1 mich2 mich3 = Mprim {prim = `pair; args = [mich1;mich2;mich3]; annots = []}
 
 let tuple4_micheline mich1 mich2 mich3 mich4 = Mprim {prim = `pair; args = [mich1;mich2;mich3;mich4]; annots = []}

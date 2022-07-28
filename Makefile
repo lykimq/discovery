@@ -1,17 +1,19 @@
 #This Makefile is only generated once, you can edit it at will.
 include Makefile.generated
-OCAML_SOURCES=./src/ocaml_sdk
-OCAML_SCENARIOS=./src/ocaml_scenarios
-TS_SOURCES=./src/ts-sdk
+db?=discovery
+OCAML_SOURCES=/home/quyen/discovery/src/ocaml_sdk
+OCAML_SCENARIOS=/home/quyen/discovery/src/ocaml_scenarios
+OCAML_CRAWLORI=/home/quyen/discovery/src/ocaml_crawlori
+TS_SOURCES=/home/quyen/discovery/src/ts-sdk
 SCRIPTS=./scripts
 
 all: ocaml ts
 
 run_scenario_ocaml: ocaml
-	dune exec ./src/ocaml_scenarios/scenario.exe
+	dune exec /home/quyen/discovery/src/ocaml_scenarios/scenario.exe
 
 ocaml:
-	dune build
+		@PGDATABASE=$(db) PGCUSTOM_CONVERTERS_CONFIG=${OCAML_CRAWLORI}/converters.sexp dune build
 
 _opam:
 	opam switch create . 4.13.1 --no-install
@@ -19,9 +21,14 @@ _opam:
 deps:
 	@opam install . --deps-only -y
 
+drop:
+	@dropdb ${db}
+	dune clean
+
 format-ocaml:
 	@for f in $(shell ls ${OCAML_SOURCES}/*.ml); do ocamlformat -i $${f}; done
 	@for f in $(shell ls ${OCAML_SCENARIOS}/*.ml); do ocamlformat -i $${f}; done
+	@for f in $(shell ls ${OCAML_CRAWLORI}/*.ml); do ocamlformat -i $${f}; done
 
 format-ts:
 	@for f in $(shell ls ${TS_SOURCES}/*.ts); do tsfmt $${f} -r; done

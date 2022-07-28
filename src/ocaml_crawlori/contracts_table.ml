@@ -11,7 +11,10 @@ index int not null, \
 level int not null, \
 tsp timestamp not null, \
 main boolean not null, \
-bmid_discovery_ zarith)" ;
+bmid_discovery_ zarith, \
+bmid_consensus_vault_vault zarith, \
+bmid_consensus_vault_used_handles zarith, \
+bmid_consensus_vault_known_handles_hash zarith)" ;
 
 "create index contracts_address_index on contracts(address)" ;
 "create index contracts_kind_index on contracts(kind)" ;

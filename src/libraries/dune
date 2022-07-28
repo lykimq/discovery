@@ -5,14 +5,23 @@
 (library
 (name factori_types)
 (modules factori_types)
-(libraries zarith tzfunc))
+(libraries zarith tzfunc)
+
+
+)
 
 (library
 (name blockchain)
 (modules blockchain)
-(libraries tzfunc))
+(libraries tzfunc)
+
+
+)
 
 (library
 (name utils)
 (modules utils)
-(libraries tzfunc blockchain ez_file))
+(libraries tzfunc blockchain ez_file)
+
+
+)

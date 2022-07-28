@@ -23,6 +23,18 @@
         {
           "name": "ci_bmid_discovery_",
           "type": "z option"
+        },
+        {
+          "name": "ci_bmid_consensus_vault_vault",
+          "type": "z option"
+        },
+        {
+          "name": "ci_bmid_consensus_vault_used_handles",
+          "type": "z option"
+        },
+        {
+          "name": "ci_bmid_consensus_vault_known_handles_hash",
+          "type": "z option"
         }
       ],
       "ppx": "encoding"
@@ -47,6 +59,18 @@
           [
             "ci_bmid_discovery_",
             "Option.bind r#bmid_discovery_ (fun s -> Some (Z.of_string s))"
+          ],
+          [
+            "ci_bmid_consensus_vault_vault",
+            "Option.bind r#bmid_consensus_vault_vault (fun s -> Some (Z.of_string s))"
+          ],
+          [
+            "ci_bmid_consensus_vault_used_handles",
+            "Option.bind r#bmid_consensus_vault_used_handles (fun s -> Some (Z.of_string s))"
+          ],
+          [
+            "ci_bmid_consensus_vault_known_handles_hash",
+            "Option.bind r#bmid_consensus_vault_known_handles_hash (fun s -> Some (Z.of_string s))"
           ]
         ]
       }
@@ -54,6 +78,9 @@
     {
       "name": "track_contract",
       "args": [
+        "?ci_bmid_consensus_vault_known_handles_hash",
+        "?ci_bmid_consensus_vault_used_handles",
+        "?ci_bmid_consensus_vault_vault",
         "?ci_bmid_discovery_",
         "address",
         "kind"
@@ -71,6 +98,18 @@
           [
             "ci_bmid_discovery_",
             "ci_bmid_discovery_"
+          ],
+          [
+            "ci_bmid_consensus_vault_vault",
+            "ci_bmid_consensus_vault_vault"
+          ],
+          [
+            "ci_bmid_consensus_vault_used_handles",
+            "ci_bmid_consensus_vault_used_handles"
+          ],
+          [
+            "ci_bmid_consensus_vault_known_handles_hash",
+            "ci_bmid_consensus_vault_known_handles_hash"
           ]
         ]
       }

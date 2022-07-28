@@ -61,6 +61,27 @@
       "type": "zarith",
       "option": true,
       "source": "mic_parameter"
+    },
+    {
+      "name": "bmid_consensus_vault_vault",
+      "bm_name": "vault",
+      "type": "zarith",
+      "option": true,
+      "source": "mic_parameter"
+    },
+    {
+      "name": "bmid_consensus_vault_used_handles",
+      "bm_name": "used_handles",
+      "type": "zarith",
+      "option": true,
+      "source": "mic_parameter"
+    },
+    {
+      "name": "bmid_consensus_vault_known_handles_hash",
+      "bm_name": "known_handles_hash",
+      "type": "zarith",
+      "option": true,
+      "source": "mic_parameter"
     }
   ]
 }

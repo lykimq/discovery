@@ -3,12 +3,16 @@
 let upgrade =
 Static_tables.upgrade@
 Contracts_table.upgrade@
-Discovery_tables.upgrade
+Discovery_tables.upgrade@
+Consensus_tables.upgrade@
+Dummy_ticket_tables.upgrade
 
 let downgrade =
 Static_tables.downgrade@
 Contracts_table.downgrade@
-Discovery_tables.downgrade
+Discovery_tables.downgrade@
+Consensus_tables.downgrade@
+Dummy_ticket_tables.downgrade
 
 let () =
   let database = Option.value ~default:Db_env.database (Sys.getenv_opt "PGDATABASE") in

@@ -3,7 +3,9 @@ open Common
 
 let register_all_plugins config=
 let open Make(Pg)(E) in
-Plugins.register_mod (module Discovery_plugin)
+Plugins.register_mod (module Discovery_plugin);
+Plugins.register_mod (module Consensus_plugin);
+Plugins.register_mod (module Dummy_ticket_plugin)
 
 ;
 

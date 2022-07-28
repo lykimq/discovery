@@ -1,129 +1,5 @@
 [
   {
-    "name": "vault",
-    "type": {
-      "record": {
-        "PairP": [
-          {
-            "PairP": [
-              {
-                "LeafP": [
-                  "known_handles_hash",
-                  {
-                    "bigmap": [
-                      {
-                        "base": "byte"
-                      },
-                      {
-                        "base": "unit"
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "LeafP": [
-                  "used_handles",
-                  {
-                    "bigmap": [
-                      {
-                        "base": "nat"
-                      },
-                      {
-                        "base": "unit"
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "LeafP": [
-              "vault",
-              {
-                "bigmap": [
-                  {
-                    "pair": [
-                      {
-                        "base": "address"
-                      },
-                      {
-                        "base": "byte"
-                      }
-                    ]
-                  },
-                  {
-                    "ticket": {
-                      "base": "byte"
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    }
-  },
-  {
-    "name": "handle",
-    "type": {
-      "record": {
-        "PairP": [
-          {
-            "PairP": [
-              {
-                "PairP": [
-                  {
-                    "LeafP": [
-                      "amount",
-                      {
-                        "base": "nat"
-                      }
-                    ]
-                  },
-                  {
-                    "LeafP": [
-                      "data",
-                      {
-                        "base": "byte"
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "LeafP": [
-                  "id",
-                  {
-                    "base": "nat"
-                  }
-                ]
-              },
-              {
-                "LeafP": [
-                  "owner",
-                  {
-                    "base": "address"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "LeafP": [
-              "ticketer",
-              {
-                "base": "address"
-              }
-            ]
-          }
-        ]
-      }
-    }
-  },
-  {
     "name": "update_root_hash",
     "type": {
       "record": {
@@ -154,11 +30,17 @@
                 "LeafP": [
                   "current_validator_keys",
                   {
-                    "list": {
-                      "option": {
-                        "base": "key"
+                    "unary": [
+                      "list",
+                      {
+                        "unary": [
+                          "option",
+                          {
+                            "base": "key"
+                          }
+                        ]
                       }
-                    }
+                    ]
                   }
                 ]
               },
@@ -178,11 +60,17 @@
                 "LeafP": [
                   "signatures",
                   {
-                    "list": {
-                      "option": {
-                        "base": "signature"
+                    "unary": [
+                      "list",
+                      {
+                        "unary": [
+                          "option",
+                          {
+                            "base": "signature"
+                          }
+                        ]
                       }
-                    }
+                    ]
                   }
                 ]
               },
@@ -200,68 +88,12 @@
             "LeafP": [
               "validators",
               {
-                "list": {
-                  "base": "keyhash"
-                }
-              }
-            ]
-          }
-        ]
-      }
-    }
-  },
-  {
-    "name": "root_hash",
-    "type": {
-      "record": {
-        "PairP": [
-          {
-            "PairP": [
-              {
-                "PairP": [
+                "unary": [
+                  "list",
                   {
-                    "LeafP": [
-                      "current_block_hash",
-                      {
-                        "base": "byte"
-                      }
-                    ]
-                  },
-                  {
-                    "LeafP": [
-                      "current_block_height",
-                      {
-                        "base": "int"
-                      }
-                    ]
+                    "base": "keyhash"
                   }
                 ]
-              },
-              {
-                "LeafP": [
-                  "current_handles_hash",
-                  {
-                    "base": "byte"
-                  }
-                ]
-              },
-              {
-                "LeafP": [
-                  "current_state_hash",
-                  {
-                    "base": "byte"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "LeafP": [
-              "current_validators",
-              {
-                "list": {
-                  "base": "keyhash"
-                }
               }
             ]
           }
@@ -369,16 +201,217 @@
             "LeafP": [
               "proof",
               {
-                "list": {
-                  "pair": [
+                "unary": [
+                  "list",
+                  {
+                    "pair": [
+                      {
+                        "base": "byte"
+                      },
+                      {
+                        "base": "byte"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "vault",
+    "type": {
+      "record": {
+        "PairP": [
+          {
+            "PairP": [
+              {
+                "LeafP": [
+                  "known_handles_hash",
+                  {
+                    "binary": [
+                      "bigMap",
+                      [
+                        {
+                          "base": "byte"
+                        },
+                        {
+                          "base": "unit"
+                        }
+                      ]
+                    ]
+                  }
+                ]
+              },
+              {
+                "LeafP": [
+                  "used_handles",
+                  {
+                    "binary": [
+                      "bigMap",
+                      [
+                        {
+                          "base": "nat"
+                        },
+                        {
+                          "base": "unit"
+                        }
+                      ]
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "LeafP": [
+              "vault",
+              {
+                "binary": [
+                  "bigMap",
+                  [
                     {
-                      "base": "byte"
+                      "pair": [
+                        {
+                          "base": "address"
+                        },
+                        {
+                          "base": "byte"
+                        }
+                      ]
                     },
                     {
-                      "base": "byte"
+                      "unary": [
+                        "ticket",
+                        {
+                          "base": "byte"
+                        }
+                      ]
                     }
                   ]
-                }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "handle",
+    "type": {
+      "record": {
+        "PairP": [
+          {
+            "PairP": [
+              {
+                "PairP": [
+                  {
+                    "LeafP": [
+                      "amount",
+                      {
+                        "base": "nat"
+                      }
+                    ]
+                  },
+                  {
+                    "LeafP": [
+                      "data",
+                      {
+                        "base": "byte"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "LeafP": [
+                  "id",
+                  {
+                    "base": "nat"
+                  }
+                ]
+              },
+              {
+                "LeafP": [
+                  "owner",
+                  {
+                    "base": "address"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "LeafP": [
+              "ticketer",
+              {
+                "base": "address"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "root_hash",
+    "type": {
+      "record": {
+        "PairP": [
+          {
+            "PairP": [
+              {
+                "PairP": [
+                  {
+                    "LeafP": [
+                      "current_block_hash",
+                      {
+                        "base": "byte"
+                      }
+                    ]
+                  },
+                  {
+                    "LeafP": [
+                      "current_block_height",
+                      {
+                        "base": "int"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "LeafP": [
+                  "current_handles_hash",
+                  {
+                    "base": "byte"
+                  }
+                ]
+              },
+              {
+                "LeafP": [
+                  "current_state_hash",
+                  {
+                    "base": "byte"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "LeafP": [
+              "current_validators",
+              {
+                "unary": [
+                  "list",
+                  {
+                    "base": "keyhash"
+                  }
+                ]
               }
             ]
           }
@@ -403,9 +436,12 @@
             "LeafP": [
               "ticket",
               {
-                "ticket": {
-                  "base": "byte"
-                }
+                "unary": [
+                  "ticket",
+                  {
+                    "base": "byte"
+                  }
+                ]
               }
             ]
           }
