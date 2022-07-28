@@ -1,0 +1,85 @@
+(library
+(name discovery_plugin)
+(modules discovery_plugin)
+(libraries bm_utils crawlori.pg contracts discovery_ocaml_interface discovery_tables)
+
+(preprocess (pps pgocaml_ppx ppx_deriving_encoding ez_api.ppx))
+(preprocessor_deps (env_var "PGDATABASE") (env_var "PGCUSTOM_CONVERTERS_CONFIG") .db_witness))
+
+(library
+(name discovery_tables)
+(modules discovery_tables)
+
+
+
+)
+
+(rule
+
+
+(action (progn (write-file db_env.ml "
+let database = \"%{env:PGDATABASE=discovery}\"
+let no_update = false"))))
+
+(library
+(name db_env_box)
+(modules db_env)
+
+(implements crawlori.db_env)
+
+)
+
+(library
+(name static_tables)
+(modules static_tables)
+
+
+
+)
+
+(library
+(name contracts_table)
+(modules contracts_table)
+
+
+
+)
+
+(library
+(name contracts)
+(modules contracts)
+(libraries common crawlori.pg)
+
+(preprocess (pps pgocaml_ppx ppx_deriving_encoding ez_api.ppx))
+(preprocessor_deps (env_var "PGDATABASE") (env_var "PGCUSTOM_CONVERTERS_CONFIG") .db_witness))
+
+(executable
+(name update)
+(modules update)
+(libraries discovery_tables static_tables contracts_table ez_pgocaml crawlori.tables db_env_box))
+
+(rule
+(deps update.exe)
+(targets .db_witness)
+(action (progn (with-stdout-to %{targets} (run %{project_root}/src/ocaml_crawlori/update.exe)))))
+
+(library
+(name common)
+(modules common info)
+(libraries crawlori.pg db_env_box tzfunc)
+
+(preprocess (pps pgocaml_ppx ppx_deriving_encoding))
+(preprocessor_deps (env_var "PGDATABASE") (env_var "PGCUSTOM_CONVERTERS_CONFIG") .db_witness))
+
+(library
+(name bm_utils)
+(modules bm_utils)
+(libraries common crawlori.pg tzfunc)
+
+
+)
+
+(executable
+(name crawler)
+(modules crawler register)
+(libraries discovery_plugin common crawlori ez_api.icurl_lwt ez_api.server))

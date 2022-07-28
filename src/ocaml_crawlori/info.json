@@ -1,0 +1,79 @@
+{
+  "open_modules": [
+    "tzfunc",
+    "proto"
+  ],
+  "types": [
+    {
+      "name": "z",
+      "value": "(A.uzarith[@encoding A.uzarith_enc.json])",
+      "ppx": "encoding"
+    },
+    {
+      "name": "contract_info",
+      "fields": [
+        {
+          "name": "ci_address",
+          "type": "A.contract [@encoding A.contract_enc.json]"
+        },
+        {
+          "name": "ci_kind",
+          "type": "string"
+        },
+        {
+          "name": "ci_bmid_discovery_",
+          "type": "z option"
+        }
+      ],
+      "ppx": "encoding"
+    }
+  ],
+  "body": [
+    {
+      "name": "info_of_row",
+      "args": [
+        "r"
+      ],
+      "content": {
+        "RecordSet": [
+          [
+            "ci_address",
+            "r#address"
+          ],
+          [
+            "ci_kind",
+            "r#kind"
+          ],
+          [
+            "ci_bmid_discovery_",
+            "Option.bind r#bmid_discovery_ (fun s -> Some (Z.of_string s))"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "track_contract",
+      "args": [
+        "?ci_bmid_discovery_",
+        "address",
+        "kind"
+      ],
+      "content": {
+        "RecordSet": [
+          [
+            "ci_address",
+            "address"
+          ],
+          [
+            "ci_kind",
+            "kind"
+          ],
+          [
+            "ci_bmid_discovery_",
+            "ci_bmid_discovery_"
+          ]
+        ]
+      }
+    }
+  ]
+}
